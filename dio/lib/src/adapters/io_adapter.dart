@@ -52,6 +52,9 @@ class DefaultHttpClientAdapter implements HttpClientAdapter {
       }
 
       //Set Headers
+      if (options.method == 'GET') {
+        request.headers.removeAll('content-length');
+      }
       options.headers.forEach((k, v) => request.headers.set(k, v));
     } on SocketException catch (e) {
       if (e.message.contains('timed out')) {
